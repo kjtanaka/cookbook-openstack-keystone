@@ -27,10 +27,22 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['openstack-keystone']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['openstack-keystone']['public_address']</tt></td>
+    <td>text</td>
+    <td>Public Address</td>
+    <td><tt>127.0.0.1</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['openstack-keystone']['admin_address']</tt></td>
+    <td>text</td>
+    <td>Admin Address</td>
+    <td><tt>127.0.0.1</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['openstack-keystone']['internal_address']</tt></td>
+    <td>text</td>
+    <td>Internal Address</td>
+    <td><tt>127.0.0.1</tt></td>
   </tr>
 </table>
 
