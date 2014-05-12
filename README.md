@@ -47,7 +47,12 @@ Just include `openstack-keystone` in your node's `run_list`:
   "name":"my_node",
   "run_list": [
     "recipe[openstack-keystone]"
-  ]
+  ],
+  "openstack": {
+    "public_address": "123.123.123.123",
+    "admin_address": "192.168.33.5",
+    "internal_address": "192.168.33.5"
+  }
 }
 ```
 
@@ -65,4 +70,5 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Author: Koji Tanaka
+License: Apache 2.0

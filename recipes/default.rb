@@ -21,8 +21,13 @@ secrets = Chef::EncryptedDataBagItem.load("openstack", "secrets")
 openstack_mysql_user = secrets['mysql_user']
 openstack_mysql_password = secrets['mysql_password']
 openstack_admin_token = secrets['admin_token']
+openstack_admin_password = secrets['admin_password']
+openstack_service_password = secrets['service_password']
 openstack_mysql_host = "127.0.0.1"
 keystone_db = "keystone"
+openstack_public_address = node["openstack"]["public_address"]
+openstack_internal_address = node["openstack"]["internal_address"]
+openstack_admin_address = node["openstack"]["admin_address"]
 
 package "keystone" do
 	action :install
@@ -54,5 +59,39 @@ end
 service "keystone" do
   supports :restart => true
   restart_command "restart keystone"
+  action :nothing
+end
+
+template "/root/admin_credential" do
+  source "admin_credential.erb"
+  mode "0600"
+  owner "root"
+  group "root"
+  action :create
+  variables(
+    :openstack_admin_password => openstack_admin_password,
+    :openstack_admin_address => openstack_admin_address
+	)
+end
+
+template "/root/sample_data.sh" do
+  source "sample_data.sh.erb"
+  mode "0600"
+  owner "root"
+  group "root"
+  action :create
+  variables(
+    :openstack_admin_password => openstack_admin_password,
+    :openstack_service_password => openstack_service_password,
+    :openstack_admin_address => openstack_admin_address,
+    :openstack_internal_address => openstack_internal_address,
+    :openstack_public_address => openstack_public_address
+	)
+  notifies :run, "execute[init_keystone_data]", :immediately
+end
+
+execute "init_keystone_data" do
+  command "bash /root/sample_data.sh && touch /etc/keystone/.init_keystone_data_do_not_delete"
+  creates "/etc/keystone/.init_keystone_data_do_not_delete"
   action :nothing
 end
