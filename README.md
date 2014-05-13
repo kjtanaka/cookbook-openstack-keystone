@@ -48,11 +48,11 @@ e.g.
 
 Usage
 -----
-#### openstack-keystone::default
-TODO: Write usage instructions for each cookbook.
+1. Create data bag `openstack` `secrets` like this.
 
-e.g.
-Just include `openstack-keystone` in your node's `run_list`:
+
+
+2. Include `openstack-keystone` in your node's `run_list` like this:
 
 ```json
 {
