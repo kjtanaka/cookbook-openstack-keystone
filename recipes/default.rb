@@ -23,7 +23,7 @@ openstack_mysql_password = secrets['mysql_password']
 openstack_admin_token = secrets['admin_token']
 openstack_admin_password = secrets['admin_password']
 openstack_service_password = secrets['service_password']
-openstack_mysql_host = "127.0.0.1"
+openstack_mysql_host = node["openstack"]["admin_address"]
 keystone_db = "keystone"
 openstack_public_address = node["openstack"]["public_address"]
 openstack_internal_address = node["openstack"]["internal_address"]
@@ -53,7 +53,7 @@ execute "keystone_manage_db_sync" do
   command "keystone-manage db_sync && touch /etc/keystone/.db_synced_do_not_delete"
   creates "/etc/keystone/.db_synced_do_not_delete"
   action :run
-  notifies :restart, "service[keystone]", :immediately
+  notifies :restart, "service[keystone]"
 end
 
 service "keystone" do
@@ -87,7 +87,7 @@ template "/root/sample_data.sh" do
     :openstack_internal_address => openstack_internal_address,
     :openstack_public_address => openstack_public_address
 	)
-  notifies :run, "execute[init_keystone_data]", :immediately
+  notifies :run, "execute[init_keystone_data]"
 end
 
 execute "init_keystone_data" do
