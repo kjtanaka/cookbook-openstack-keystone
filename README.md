@@ -53,12 +53,12 @@ Usage
 ```json
 {
   "id": "secrets",
-  "mysql_admin_password": "KGMEKKGIe9",
+  "mysql_admin_password": "abcd1234",
   "mysql_user": "openstack",
-  "mysql_password": "UKGIEKKgKEJ3",
-  "admin_token": "KKGJJEk3i4jj5hshhhG",
-  "admin_password": "KehGKejtKGEKSE2",
-  "service_password": "KehGKejtKsdfa45"
+  "mysql_password": "efgh5678",
+  "admin_token": "ABCD1234",
+  "admin_password": "DEFG5678",
+  "service_password": "XYZ1111"
 }
 ```
 
