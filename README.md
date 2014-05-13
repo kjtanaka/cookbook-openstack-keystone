@@ -48,9 +48,19 @@ e.g.
 
 Usage
 -----
-1. Create data bag `openstack` `secrets` like this.
+1. Create a data bag `openstack` and an item `secrets` like this.
 
-
+```json
+{
+  "id": "secrets",
+  "mysql_admin_password": "KGMEKKGIe9",
+  "mysql_user": "openstack",
+  "mysql_password": "UKGIEKKgKEJ3",
+  "admin_token": "KKGJJEk3i4jj5hshhhG",
+  "admin_password": "KehGKejtKGEKSE2",
+  "service_password": "KehGKejtKsdfa45"
+}
+```
 
 2. Include `openstack-keystone` in your node's `run_list` like this:
 
