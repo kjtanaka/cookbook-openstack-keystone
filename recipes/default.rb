@@ -62,6 +62,11 @@ service "keystone" do
   action :nothing
 end
 
+service "mysql" do
+  supports :restart => true
+  action :nothing
+end
+
 template "/root/admin_credential" do
   source "admin_credential.erb"
   mode "0600"
@@ -87,6 +92,7 @@ template "/root/sample_data.sh" do
     :openstack_internal_address => openstack_internal_address,
     :openstack_public_address => openstack_public_address
 	)
+	notifies :restart, "service[mysql]"
   notifies :run, "execute[init_keystone_data]"
 end
 
