@@ -92,8 +92,8 @@ template "/root/sample_data.sh" do
     :openstack_internal_address => openstack_internal_address,
     :openstack_public_address => openstack_public_address
 	)
-	notifies :restart, "service[mysql]"
-  notifies :run, "execute[init_keystone_data]"
+	notifies :restart, "service[mysql]", :immediately
+  notifies :run, "execute[init_keystone_data]", :immediately
 end
 
 execute "init_keystone_data" do
